@@ -1,29 +1,36 @@
-<!DOCTYPE html><html lang="id" class="scroll-smooth"><head>
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Faiz Mi'raj Salsabil | Portfolio</title>
-    <!-- Google Fonts: Inter -->
+    
+    <!-- Google Fonts: Inter (Untuk konten bawah) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Tailwind CSS CDN with Custom Color Configuration -->
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'], // Bawaan konten
+                        hn: ['"Helvetica Neue ME"', 'Helvetica', 'Arial', 'sans-serif'], // Khusus Hero baru
                     },
                     colors: {
-                        brand: {
-                            dark: '#182631',       /* Primary dark */
-                            slate: '#3F4E4F',      /* Secondary deep slate */
-                            accent: '#A5C8D6',     /* Soft cyan/blue highlight */
-                            light: '#F0F4F8',      /* Crisp clean background */
-                            sage: '#D9E4E0',       /* Light neutral sage tint */
+                        cream: '#efeee9', // Khusus Hero baru
+                        brand: { // Bawaan template lama
+                            dark: '#182631',
+                            slate: '#3F4E4F',
+                            accent: '#A5C8D6',
+                            light: '#F0F4F8',
+                            sage: '#D9E4E0',
                         }
                     }
                 }
@@ -31,38 +38,60 @@
         }
     </script>
     <style>
+        /* Font Khusus Hero Editorial */
+        @font-face {
+            font-family: 'Helvetica Neue ME';
+            src: url('https://db.onlinewebfonts.com/c/95cecf452d3208890088a5b4c19c7ecf?family=Helvetica+Neue+ME') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F0F4F8;
             color: #182631;
         }
-        /* Custom subtle scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #F0F4F8;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #A5C8D6;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3F4E4F;
+        
+        /* Custom scrollbar bawaan */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F0F4F8; }
+        ::-webkit-scrollbar-thumb { background: #A5C8D6; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3F4E4F; }
+
+        /* =========================================
+           Animasi Khusus Hero Editorial
+           ========================================= */
+        @keyframes anim-fade-in { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes anim-rise-in { from { opacity: 0; transform: translateY(4vh) scale(1.03); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes anim-fade-up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes anim-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        .anim-fade-in { animation: anim-fade-in 1.2s ease-out both; }
+        .anim-rise-in { animation: anim-rise-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: 300ms; }
+        .anim-fade-up { animation: anim-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        .anim-line { animation: anim-line 1.1s cubic-bezier(0.76, 0, 0.24, 1) both; transform-origin: left; animation-delay: 1200ms; }
+        .marquee { animation: marquee 30s linear infinite; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .anim-fade-in, .anim-rise-in, .anim-fade-up, .anim-line, .marquee { 
+                animation-duration: 0.01ms !important; 
+                animation-delay: 0s !important; 
+            }
         }
     </style>
 </head>
 <body class="bg-brand-light text-brand-dark selection:bg-brand-accent selection:text-brand-dark antialiased">
 
     <!-- ========================================================================= -->
-    <!-- 1. HEADER & NAVIGATION (Sticky Navbar)                                    -->
+    <!-- 1. OLD NAVBAR (Disembunyikan di atas, muncul saat di-scroll)              -->
     <!-- ========================================================================= -->
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 bg-transparent">
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-[60] transition-transform duration-500 py-3 bg-white/90 backdrop-blur-md border-b border-gray-200/60 shadow-sm -translate-y-full">
         <div class="max-w-7xl mx-auto px-6 sm:px-8 flex items-center justify-between">
-
+            <div class="font-bold text-brand-dark text-lg md:hidden">Faiz Portfolio</div>
             <!-- Desktop Menu -->
-            <nav class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-1 lg:space-x-2 bg-white/70 backdrop-blur-md px-5 py-2 rounded-full border border-gray-200/60 shadow-sm">
-                <a href="#home" class="px-4 py-1.5 text-sm font-medium text-brand-dark hover:text-brand-dark hover:bg-brand-sage/50 rounded-full transition-all">Home</a>
+            <nav class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-1 lg:space-x-2">
+                <a href="#hero-editorial" class="px-4 py-1.5 text-sm font-medium text-brand-slate hover:text-brand-dark hover:bg-brand-sage/50 rounded-full transition-all">Home</a>
                 <a href="#about" class="px-4 py-1.5 text-sm font-medium text-brand-slate hover:text-brand-dark hover:bg-brand-sage/50 rounded-full transition-all">About</a>
                 <a href="#skills" class="px-4 py-1.5 text-sm font-medium text-brand-slate hover:text-brand-dark hover:bg-brand-sage/50 rounded-full transition-all">Skills</a>
                 <a href="#experience" class="px-4 py-1.5 text-sm font-medium text-brand-slate hover:text-brand-dark hover:bg-brand-sage/50 rounded-full transition-all">Experience</a>
@@ -71,122 +100,127 @@
 
             <!-- Quick Action Button (Desktop) -->
             <div class="hidden md:block ml-auto">
-                <a href="https://drive.google.com/drive/folders/1HrD7onEfT0m6sBf6hMlOSCLZmVA6gyyM?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-brand-dark hover:bg-brand-slate text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
-                    <span class="">Lihat Berkas</span>
+                <a href="https://drive.google.com/drive/folders/1HrD7onEfT0m6sBf6hMlOSCLZmVA6gyyM?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-brand-dark hover:bg-brand-slate text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md transition-all hover:-translate-y-0.5">
+                    <span>Lihat Berkas</span>
                     <i class="fa-solid fa-arrow-right text-xs text-brand-accent"></i>
                 </a>
             </div>
 
             <!-- Mobile Hamburger Button -->
-            <button id="mobileMenuBtn" class="md:hidden text-brand-dark p-2 rounded-lg hover:bg-brand-sage/50 focus:outline-none" aria-label="Toggle navigation">
+            <button id="mobileMenuBtn" class="md:hidden text-brand-dark p-2 rounded-lg hover:bg-brand-sage/50 focus:outline-none">
                 <i id="menuIcon" class="fa-solid fa-bars text-xl"></i>
             </button>
         </div>
 
         <!-- Mobile Dropdown Navigation -->
         <div id="mobileMenu" class="hidden md:hidden max-w-7xl mx-auto px-6 pt-3">
-            <div class="bg-white/95 backdrop-blur-lg rounded-2xl p-5 border border-gray-200 shadow-xl flex flex-col space-y-3">
-                <a href="#home" class="mobile-nav-link py-2 px-3 font-medium text-brand-dark hover:bg-brand-sage/40 rounded-lg">Home</a>
+            <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-xl flex flex-col space-y-3">
+                <a href="#hero-editorial" class="mobile-nav-link py-2 px-3 font-medium text-brand-dark hover:bg-brand-sage/40 rounded-lg">Home</a>
                 <a href="#about" class="mobile-nav-link py-2 px-3 font-medium text-brand-dark hover:bg-brand-sage/40 rounded-lg">About</a>
-                <a href="#skills" class="mobile-nav-link py-2 px-3 font-medium text-brand-dark hover:bg-brand-sage/40 rounded-lg">Skills &amp; Certifications</a>
+                <a href="#skills" class="mobile-nav-link py-2 px-3 font-medium text-brand-dark hover:bg-brand-sage/40 rounded-lg">Skills & Certifications</a>
                 <a href="#experience" class="mobile-nav-link py-2 px-3 font-medium text-brand-dark hover:bg-brand-sage/40 rounded-lg">Experience</a>
                 <a href="#contact" class="mobile-nav-link py-2 px-3 font-medium text-brand-dark hover:bg-brand-sage/40 rounded-lg">Contact</a>
-                <a href="https://drive.google.com/drive/folders/1HrD7onEfT0m6sBf6hMlOSCLZmVA6gyyM?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-center bg-brand-dark text-white font-medium py-2.5 rounded-xl shadow mt-2">Lihat Berkas</a>
             </div>
         </div>
     </header>
 
-    <main>
-        <!-- ========================================================================= -->
-        <!-- 2. HERO SECTION                                                           -->
-        <!-- ========================================================================= -->
-        <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
-            <!-- Decorative Subtle Glows -->
-            <div class="absolute top-1/4 -left-20 w-80 h-80 bg-brand-accent/25 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-10 right-0 w-96 h-96 bg-brand-sage/40 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- ========================================================================= -->
+    <!-- 2. NEW EDITORIAL HERO SECTION                                             -->
+    <!-- ========================================================================= -->
+    <section id="hero-editorial" class="relative h-[100dvh] w-full overflow-hidden bg-black text-cream selection:bg-cream selection:text-black">
+        <!-- Background image -->
+        <img src="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260729_022513_486985a2-ac8c-4278-91a8-071dcd9fcaff.png&w=1280&q=85" 
+             alt="" 
+             class="absolute inset-0 h-full w-full object-cover anim-fade-in">
+        
+        <!-- Marquee -->
+        <div class="absolute inset-x-0 top-[16vh] sm:top-[14vh] z-10 overflow-hidden anim-fade-up" style="animation-delay: 500ms;">
+            <div class="marquee flex w-max whitespace-nowrap font-hn text-[16vh] sm:text-[26vh] leading-none text-cream">
+                <span class="pr-[6vw]">Faiz Mi'raj Salsabil &mdash;</span>
+                <span class="pr-[6vw]">Faiz Mi'raj Salsabil &mdash;</span>
+            </div>
+        </div>
+        
+        <!-- Front portrait -->
+        <img src="image/faiz-hero.png" 
+             alt="Portrait" 
+             class="absolute bottom-[-15%] left-[30%] -translate-x-1/2 h-[120%] w-auto max-w-none object-cover object-top z-20 pointer-events-none anim-rise-in">
+             
+        <!-- Header (Hero Chrome) -->
+        <header class="absolute inset-x-0 top-0 z-30 flex items-start justify-between px-6 pt-6 sm:px-10 sm:pt-8 font-hn">
+            <a href="#" class="font-hn text-lg tracking-wide text-cream anim-fade-up" style="animation-delay: 800ms;">My Portofolio</a>
+            
+            <div class="hidden sm:flex items-start gap-16 lg:gap-24">
+                <span class="text-sm anim-fade-up" style="animation-delay: 900ms;">2026</span>
+                
+                <nav class="flex flex-col gap-0.5 text-sm">
+                    <a href="#about" class="hover:opacity-60 transition-opacity duration-300 anim-fade-up" style="animation-delay: 1000ms;">Story</a>
+                    <a href="#experience" class="hover:opacity-60 transition-opacity duration-300 anim-fade-up" style="animation-delay: 1080ms;">Jobs</a>
+                    <a href="#contact" class="hover:opacity-60 transition-opacity duration-300 anim-fade-up" style="animation-delay: 1160ms;">Message</a>
+                </nav>
+                
+                <nav class="flex flex-col gap-0.5 text-sm">
+                    <a href="https://www.instagram.com/faizassyirbuni/" target="_blank" rel="noopener noreferrer" class="hover:opacity-60 transition-opacity duration-300 anim-fade-up" style="animation-delay: 1150ms;">Instagram</a>
+                    <a href="https://www.tiktok.com/@faizmiraj903" target="_blank" rel="noopener noreferrer" class="hover:opacity-60 transition-opacity duration-300 anim-fade-up" style="animation-delay: 1230ms;">TikTok</a>
+                    <a href="https://www.youtube.com/@faizmiraj7777" target="_blank" rel="noopener noreferrer" class="hover:opacity-60 transition-opacity duration-300 anim-fade-up" style="animation-delay: 1310ms;">YouTube</a>
+                </nav>
+            </div>
 
-            <div class="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-                    
-                    <!-- Left: Hero Text & CTAs -->
-                    <div class="lg:col-span-7 space-y-6">
-                        <!-- Greeting Badge -->
-                        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white border border-gray-200/70 shadow-sm">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                            <span class="text-xs sm:text-sm font-semibold tracking-wide uppercase text-brand-slate">
-                                Halo, saya Faiz Mi'raj Salsabil
-                            </span>
-                        </div>
+            <!-- Hamburger Button (Mobile) -->
+            <button id="ed-hamburger-btn" class="sm:hidden relative z-50 h-10 w-10 flex flex-col items-end justify-center gap-1.5 anim-fade-up group" style="animation-delay: 900ms;">
+                <div class="h-[2px] w-6 bg-cream transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"></div>
+                <div class="h-[2px] w-6 bg-cream transition-opacity duration-300"></div>
+                <div class="h-[2px] w-6 bg-cream transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"></div>
+            </button>
+        </header>
 
-                        <!-- Main Headline -->
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-dark leading-tight tracking-tight">
-                            Adaptable Operations Professional <br class="hidden sm:inline">and Front-End Learner <br class="hidden sm:inline">
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-slate via-brand-dark to-[#2A4356]">
-                                | Versatile Multitasker
-                            </span>
-                        </h1>
+        <!-- Cream rule -->
+        <div class="absolute inset-x-6 sm:inset-x-10 bottom-[5.5rem] sm:bottom-28 z-10 h-0.5 bg-cream anim-line"></div>
+        
+        <!-- Desktop/Mobile Footer Blurb -->
+        <div class="absolute inset-x-0 bottom-0 sm:z-10 flex items-end justify-between px-6 pb-5 sm:px-10 sm:pb-8 text-xs sm:text-sm leading-relaxed font-hn">
+            <div class="flex flex-col anim-fade-up" style="animation-delay: 1400ms;">
+                <span>Web Dev Learner</span>
+                <span>F&B and Warehouse Ops</span>
+                <span>Data Accuracy & Admin</span>
+            </div>
+            
+            <div class="flex flex-col text-right anim-fade-up" style="animation-delay: 1550ms;">
 
-                        <!-- Sub-headline -->
-                        <p class="text-base sm:text-lg text-brand-slate leading-relaxed max-w-2xl font-normal">
-                            Profesional lintas bidang dengan pengalaman di sektor F&B, administrasi, dan pergudangan. Memiliki fondasi analitis yang kuat serta antusiasme tinggi dalam membangun antarmuka web yang fungsional untuk mendukung efisiensi bisnis.
-                        </p>
+                <div class="mt-4 pt-3 border-t border-gray-200/60 flex items-center"><a href="https://drive.google.com/drive/folders/13qKuG4kqpUa8JrBYRgHlkeXmQpZj9-eg?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border border-brand-dark/20 hover:border-brand-dark text-brand-dark hover:bg-brand-dark hover:text-white transition-all duration-200"><span class="">Lihat CV</span><i class="fa-solid fa-arrow-right text-xs"></i></a></div></div>
 
-                        <!-- Key Highlight Chips -->
-                        <div class="flex flex-wrap gap-2.5 pt-2">
-                            <span class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-brand-slate shadow-xs">
-                                <i class="fa-solid fa-laptop text-brand-accent text-sm"></i> Web Dev Learner
-                            </span>
-                            <span class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-brand-slate shadow-xs">
-                                <i class="fa-solid fa-utensils text-brand-accent text-sm"></i> F&amp;B and Warehouse Ops
-                            </span>
-                            <span class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-brand-slate shadow-xs">
-                                <i class="fa-solid fa-chart-column text-brand-accent text-sm"></i> Data Accuracy &amp; Admin
-                            </span>
-                        </div>
+            </div>
+        </div>
 
-                        <!-- Call-To-Action (CTA) Buttons -->
-                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
-                            <a href="#contact" class="inline-flex justify-center items-center gap-3 bg-brand-dark hover:bg-brand-slate text-white px-7 py-3.5 rounded-xl font-semibold shadow-lg shadow-brand-dark/15 hover:shadow-xl hover:-translate-y-0.5 transition-all text-center">
-                                <span class="">Hubungi Saya</span>
-                                <i class="fa-solid fa-paper-plane text-brand-accent text-sm"></i>
-                            </a>
-                            <a href="https://drive.google.com/drive/folders/13qKuG4kqpUa8JrBYRgHlkeXmQpZj9-eg?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex justify-center items-center gap-3 bg-white hover:bg-brand-sage/40 text-brand-dark border-2 border-brand-dark/20 hover:border-brand-dark px-7 py-3.5 rounded-xl font-semibold transition-all text-center shadow-sm hover:-translate-y-0.5">
-                                <i class="fa-solid fa-file-arrow-down text-brand-slate"></i>
-                                <span class="">Download CV</span>
-                            </a>
-                        </div>
+        <!-- Mobile Drawer -->
+        <div id="ed-drawer-backdrop" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500 sm:hidden"></div>
+        <div id="ed-drawer-panel" class="fixed top-0 right-0 bottom-0 z-40 w-[80%] max-w-sm bg-[#141414] px-8 py-10 translate-x-full transition-transform duration-600 ease-[cubic-bezier(0.76,0,0.24,1)] sm:hidden font-hn">
+            <button id="ed-drawer-close" class="absolute right-6 top-6 opacity-0 rotate-90 transition-all duration-500 delay-300 text-cream">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            
+            <div class="flex flex-col h-full mt-12 gap-12 text-cream">
+                <div class="flex flex-col gap-4">
+                    <span class="text-xs uppercase tracking-[0.2em] text-cream/50 drawer-item opacity-0 translate-y-6">Site Index</span>
+                    <a href="#about" class="text-4xl drawer-item opacity-0 translate-y-6">Story</a>
+                    <a href="#experience" class="text-4xl drawer-item opacity-0 translate-y-6">Jobs</a>
+                    <a href="#contact" class="text-4xl drawer-item opacity-0 translate-y-6">Message</a>
+                </div>
+                <div class="flex flex-col gap-4 mt-auto">
+                    <span class="text-xs uppercase tracking-[0.2em] text-cream/50 drawer-item opacity-0 translate-y-4">Find Me</span>
+                    <div class="flex gap-4 flex-wrap text-sm">
+                        <a href="#" class="drawer-item opacity-0 translate-y-4">Instagram</a>
+                        <a href="#" class="drawer-item opacity-0 translate-y-4">TikTok</a>
+                        <a href="#" class="drawer-item opacity-0 translate-y-4">YouTube</a>
                     </div>
-
-                    <!-- Right: Photo Display -->
-                    <div class="lg:col-span-5 flex justify-center lg:justify-end">
-                        <div class="relative w-72 sm:w-80 md:w-88">
-                            <!-- Background Frame & Accent Elements -->
-                            <div class="absolute inset-0 bg-gradient-to-tr from-brand-dark to-brand-slate rounded-3xl rotate-3 scale-105 opacity-20"></div>
-                            <div class="absolute -inset-1 bg-gradient-to-br from-brand-accent to-brand-sage rounded-3xl -rotate-2 opacity-50 blur-sm"></div>
-
-                            <!-- Main Card with User Image -->
-                            <div class="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl border border-gray-200/80 overflow-hidden">
-                                <div class="w-full h-96 sm:h-[420px] rounded-2xl overflow-hidden bg-gray-100 flex items-center justify-center">
-                                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJuBNzKJfSI7HlLLCf3mOX3LsJyEqB9AzmN9kNN1mUx0wK0FdjibRsaUYx1jbGdQo4k0jZg9AnCm4quS8uNd5K7Fcxmua0Xa3LK6NOBPvkWt0_M9pHgAYAyVt4XsHGXb09rJiPKHvg2ypCdZn9jgvCy1x6AZjaaImEQAz2CNfrSlcK6XGIXeE0zts1tfp0hnNrXUf6oeo9mQKo9aNJcHU7JWX197uBmwNMDQafD_EnhpogBQK6gVOHwLs5pPJzW1WGmw" alt="Faiz Mi'raj Salsabil" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
-                                </div>
-                                <!-- Floating Status Pill -->
-                                <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-3 rounded-xl border border-gray-100 shadow-lg flex items-center gap-3">
-                                    <div class="w-10 h-10 rounded-lg bg-brand-dark text-brand-accent flex items-center justify-center shrink-0">
-                                        <i class="fa-solid fa-briefcase"></i>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-bold text-brand-dark">Open to Opportunity</p>
-                                        <p class="text-[11px] text-brand-slate">IT Support • Web Dev • Operasional</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
+    <!-- MULAI KONTEN BAWAAN (code.html) -->
+    <main class="relative z-10">
+        
         <!-- ========================================================================= -->
         <!-- 3. ABOUT ME SECTION                                                       -->
         <!-- ========================================================================= -->
@@ -204,41 +238,23 @@
 
                 <div class="max-w-4xl mx-auto">
                     <div class="bg-brand-light/70 p-8 sm:p-12 rounded-3xl border border-gray-200/80 shadow-sm relative overflow-hidden">
-                        <!-- Decorative Quote Icon -->
                         <i class="fa-solid fa-quote-left text-brand-accent/30 text-7xl absolute top-4 left-6 pointer-events-none"></i>
-                        
                         <div class="relative z-10 space-y-6">
                             <p class="text-lg sm:text-xl text-brand-dark leading-relaxed font-medium">
                                 "Saya adalah individu yang terbiasa bekerja di lingkungan bertempo cepat dengan fokus pada akurasi data. Meski memiliki latar belakang pendidikan non-linear, saya membuktikan kemampuan adaptasi melalui sertifikasi Web Development, penguasaan Google Workspace, dan skor ELProTe 587. Saya berkomitmen membawa komunikasi yang baik dan kepemimpinan ke dalam peran operasional dan IT."
                             </p>
-
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-gray-200">
                                 <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center text-lg">
-                                        <i class="fa-solid fa-brain"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-brand-dark text-sm">Analitis &amp; Kritis</h4>
-                                        <p class="text-xs text-brand-slate">Problem-solving terstruktur</p>
-                                    </div>
+                                    <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center text-lg"><i class="fa-solid fa-brain"></i></div>
+                                    <div><h4 class="font-bold text-brand-dark text-sm">Analitis & Kritis</h4><p class="text-xs text-brand-slate">Problem-solving terstruktur</p></div>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center text-lg">
-                                        <i class="fa-solid fa-chart-line"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-brand-dark text-sm">Akurasi Data</h4>
-                                        <p class="text-xs text-brand-slate">Ketelitian inventaris &amp; SLA</p>
-                                    </div>
+                                    <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center text-lg"><i class="fa-solid fa-chart-line"></i></div>
+                                    <div><h4 class="font-bold text-brand-dark text-sm">Akurasi Data</h4><p class="text-xs text-brand-slate">Ketelitian inventaris & SLA</p></div>
                                 </div>
                                 <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center text-lg">
-                                        <i class="fa-solid fa-users"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-brand-dark text-sm">Kolaboratif</h4>
-                                        <p class="text-xs text-brand-slate">Leadership &amp; komunikasi tim</p>
-                                    </div>
+                                    <div class="w-12 h-12 rounded-xl bg-brand-dark text-brand-accent flex items-center justify-center text-lg"><i class="fa-solid fa-users"></i></div>
+                                    <div><h4 class="font-bold text-brand-dark text-sm">Kolaboratif</h4><p class="text-xs text-brand-slate">Leadership & komunikasi tim</p></div>
                                 </div>
                             </div>
                         </div>
@@ -248,207 +264,100 @@
         </section>
 
         <!-- ========================================================================= -->
-        <!-- 4. SKILLS & CERTIFICATIONS SECTION (Grid Layout)                           -->
+        <!-- 4. SKILLS & CERTIFICATIONS SECTION                                        -->
         <!-- ========================================================================= -->
         <section id="skills" class="py-20 relative">
             <div class="max-w-7xl mx-auto px-6 sm:px-8">
                 <div class="max-w-3xl mx-auto text-center space-y-4 mb-16">
-                    <span class="text-xs font-bold uppercase tracking-wider text-brand-slate px-3 py-1 bg-brand-sage/40 rounded-full border border-brand-sage">
-                        Kompetensi
-                    </span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">
-                        Skills &amp; Sertifikasi
-                    </h2>
-                    <p class="text-brand-slate text-sm sm:text-base">
-                        Kombinasi keahlian teknis, kemampuan analitis, penguasaan bahasa, dan kredensial profesional.
-                    </p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-slate px-3 py-1 bg-brand-sage/40 rounded-full border border-brand-sage">Kompetensi</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">Skills & Sertifikasi</h2>
+                    <p class="text-brand-slate text-sm sm:text-base">Kombinasi keahlian teknis, kemampuan analitis, penguasaan bahasa, dan kredensial profesional.</p>
                     <div class="w-16 h-1 bg-brand-accent mx-auto rounded-full"></div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Card 1: Hard Skills -->
+                    <!-- Hard Skills -->
                     <div class="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex items-center gap-3.5 mb-6">
-                            <div class="w-12 h-12 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center text-xl">
-                                <i class="fa-solid fa-laptop-code"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-brand-dark">Hard Skills</h3>
-                                <p class="text-xs text-brand-slate">Fondasi Teknis &amp; Tools</p>
-                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center text-xl"><i class="fa-solid fa-laptop-code"></i></div>
+                            <div><h3 class="font-bold text-lg text-brand-dark">Hard Skills</h3><p class="text-xs text-brand-slate">Fondasi Teknis & Tools</p></div>
                         </div>
-
                         <div class="space-y-4">
-                            <!-- Skill Item: Web Technologies -->
                             <div class="p-3.5 rounded-2xl bg-brand-light/80 border border-gray-100">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-semibold text-brand-dark flex items-center gap-2">
-                                        <i class="fa-brands fa-html5 text-orange-500"></i> HTML &amp; CSS
-                                    </span>
-                                    <span class="text-xs font-bold px-2 py-0.5 rounded bg-brand-accent/30 text-brand-dark">Dasar Kuat</span>
-                                </div>
-                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-brand-dark h-full rounded-full" style="width: 80%"></div>
-                                </div>
+                                <div class="flex items-center justify-between mb-2"><span class="text-sm font-semibold text-brand-dark flex items-center gap-2"><i class="fa-brands fa-html5 text-orange-500"></i> HTML & CSS</span><span class="text-xs font-bold px-2 py-0.5 rounded bg-brand-accent/30 text-brand-dark">Dasar Kuat</span></div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden"><div class="bg-brand-dark h-full rounded-full" style="width: 80%"></div></div>
                             </div>
-
-                            <!-- Skill Item: JavaScript -->
                             <div class="p-3.5 rounded-2xl bg-brand-light/80 border border-gray-100">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-semibold text-brand-dark flex items-center gap-2">
-                                        <i class="fa-brands fa-js text-yellow-500"></i> JavaScript
-                                    </span>
-                                    <span class="text-xs font-bold px-2 py-0.5 rounded bg-brand-accent/30 text-brand-dark">Dasar</span>
-                                </div>
-                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-brand-dark h-full rounded-full" style="width: 65%"></div>
-                                </div>
+                                <div class="flex items-center justify-between mb-2"><span class="text-sm font-semibold text-brand-dark flex items-center gap-2"><i class="fa-brands fa-js text-yellow-500"></i> JavaScript</span><span class="text-xs font-bold px-2 py-0.5 rounded bg-brand-accent/30 text-brand-dark">Dasar</span></div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden"><div class="bg-brand-dark h-full rounded-full" style="width: 65%"></div></div>
                             </div>
-
-                            <!-- Skill Item: AI Prompting -->
                             <div class="p-3.5 rounded-2xl bg-brand-light/80 border border-gray-100">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-semibold text-brand-dark flex items-center gap-2">
-                                        <i class="fa-solid fa-wand-magic-sparkles text-purple-500"></i> AI Prompting
-                                    </span>
-                                    <span class="text-xs font-bold px-2 py-0.5 rounded bg-brand-accent/30 text-brand-dark">Mahir</span>
-                                </div>
-                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-brand-dark h-full rounded-full" style="width: 85%"></div>
-                                </div>
-                            </div>
-
-                            <!-- Skill Item: Office & Workspace -->
-                            <div class="p-3.5 rounded-2xl bg-brand-light/80 border border-gray-100">
-                                <span class="text-xs font-bold text-brand-slate uppercase tracking-wider block mb-2">Productivity Suites:</span>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="inline-flex items-center gap-1.5 text-xs bg-white border border-gray-200 px-2.5 py-1 rounded-lg text-brand-dark font-medium">
-                                        <i class="fa-brands fa-microsoft text-blue-600"></i> Word &amp; Excel
-                                    </span>
-                                    <span class="inline-flex items-center gap-1.5 text-xs bg-white border border-gray-200 px-2.5 py-1 rounded-lg text-brand-dark font-medium">
-                                        <i class="fa-brands fa-google text-emerald-600"></i> Google Spreadsheet
-                                    </span>
-                                </div>
+                                <div class="flex items-center justify-between mb-2"><span class="text-sm font-semibold text-brand-dark flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-purple-500"></i> AI Prompting</span><span class="text-xs font-bold px-2 py-0.5 rounded bg-brand-accent/30 text-brand-dark">Mahir</span></div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden"><div class="bg-brand-dark h-full rounded-full" style="width: 85%"></div></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Card 2: Soft Skills & Languages -->
+                    <!-- Soft Skills -->
                     <div class="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-shadow">
                         <div class="flex items-center gap-3.5 mb-6">
-                            <div class="w-12 h-12 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center text-xl">
-                                <i class="fa-solid fa-comments"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-brand-dark">Soft Skills &amp; Bahasa</h3>
-                                <p class="text-xs text-brand-slate">Interpersonal &amp; Komunikasi</p>
-                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center text-xl"><i class="fa-solid fa-comments"></i></div>
+                            <div><h3 class="font-bold text-lg text-brand-dark">Soft Skills & Bahasa</h3><p class="text-xs text-brand-slate">Interpersonal & Komunikasi</p></div>
                         </div>
-
                         <div class="space-y-4">
-                            <!-- Soft Skills Pills -->
                             <div>
                                 <span class="text-xs font-bold text-brand-slate uppercase tracking-wider block mb-2.5">Karakter Personal:</span>
                                 <div class="grid grid-cols-2 gap-2">
-                                    <div class="bg-brand-light/90 p-2.5 rounded-xl border border-gray-100 text-center">
-                                        <i class="fa-solid fa-puzzle-piece text-brand-slate text-sm mb-1 block"></i>
-                                        <span class="text-xs font-bold text-brand-dark block">Problem Solving</span>
-                                    </div>
-                                    <div class="bg-brand-light/90 p-2.5 rounded-xl border border-gray-100 text-center">
-                                        <i class="fa-solid fa-clock text-brand-slate text-sm mb-1 block"></i>
-                                        <span class="text-xs font-bold text-brand-dark block">Time Management</span>
-                                    </div>
-                                    <div class="bg-brand-light/90 p-2.5 rounded-xl border border-gray-100 text-center col-span-2">
-                                        <i class="fa-solid fa-arrows-rotate text-brand-slate text-sm mb-1 block"></i>
-                                        <span class="text-xs font-bold text-brand-dark block">High Adaptability</span>
-                                    </div>
+                                    <div class="bg-brand-light/90 p-2.5 rounded-xl border border-gray-100 text-center"><i class="fa-solid fa-puzzle-piece text-brand-slate text-sm mb-1 block"></i><span class="text-xs font-bold text-brand-dark block">Problem Solving</span></div>
+                                    <div class="bg-brand-light/90 p-2.5 rounded-xl border border-gray-100 text-center"><i class="fa-solid fa-clock text-brand-slate text-sm mb-1 block"></i><span class="text-xs font-bold text-brand-dark block">Time Management</span></div>
+                                    <div class="bg-brand-light/90 p-2.5 rounded-xl border border-gray-100 text-center col-span-2"><i class="fa-solid fa-arrows-rotate text-brand-slate text-sm mb-1 block"></i><span class="text-xs font-bold text-brand-dark block">High Adaptability</span></div>
                                 </div>
                             </div>
-
-                            <!-- Languages Section -->
                             <div class="pt-2">
                                 <span class="text-xs font-bold text-brand-slate uppercase tracking-wider block mb-2.5">Kemampuan Bahasa:</span>
                                 <div class="space-y-2.5">
                                     <div class="p-3 bg-brand-sage/30 rounded-xl border border-brand-sage flex items-center justify-between">
-                                        <div class="flex items-center gap-2.5">
-                                            <i class="fa-solid fa-globe text-brand-slate"></i>
-                                            <span class="text-sm font-bold text-brand-dark">English</span>
-                                        </div>
-                                        <span class="text-xs font-bold px-2.5 py-1 bg-white rounded-lg border border-gray-200 text-brand-dark shadow-xs">
-                                            Score: 587 (ELProTe)
-                                        </span>
-                                    </div>
-
-                                    <div class="p-3 bg-brand-sage/30 rounded-xl border border-brand-sage flex items-center justify-between">
-                                        <div class="flex items-center gap-2.5">
-                                            <i class="fa-solid fa-book-quran text-brand-slate"></i>
-                                            <span class="text-sm font-bold text-brand-dark">Arabic</span>
-                                        </div>
-                                        <span class="text-xs font-bold px-2.5 py-1 bg-white rounded-lg border border-gray-200 text-brand-dark shadow-xs">
-                                            Score: 400
-                                        </span>
+                                        <div class="flex items-center gap-2.5"><i class="fa-solid fa-globe text-brand-slate"></i><span class="text-sm font-bold text-brand-dark">English</span></div>
+                                        <span class="text-xs font-bold px-2.5 py-1 bg-white rounded-lg border border-gray-200 text-brand-dark shadow-xs">Score: 587 (ELProTe)</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Card 3: Certifications (Cards/List) -->
+                    <!-- Certifications -->
                     <div class="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-md transition-shadow md:col-span-2 lg:col-span-1">
                         <div class="flex items-center gap-3.5 mb-6">
-                            <div class="w-12 h-12 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center text-xl">
-                                <i class="fa-solid fa-certificate"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-brand-dark">Sertifikasi</h3>
-                                <p class="text-xs text-brand-slate">Kredensial &amp; Pembelajaran</p>
-                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-brand-dark text-brand-accent flex items-center justify-center text-xl"><i class="fa-solid fa-certificate"></i></div>
+                            <div><h3 class="font-bold text-lg text-brand-dark">Sertifikasi</h3><p class="text-xs text-brand-slate">Kredensial & Pembelajaran</p></div>
                         </div>
-
                         <div class="space-y-4">
-                            <!-- Cert 1 -->
                             <div class="group p-4 rounded-2xl bg-brand-light border border-gray-200 hover:border-brand-accent hover:bg-white transition-all">
                                 <div class="flex items-start gap-3">
-                                    <div class="w-10 h-10 rounded-xl bg-brand-slate text-white flex items-center justify-center shrink-0 text-sm mt-0.5">
-                                        <i class="fa-solid fa-code"></i>
-                                    </div>
+                                    <div class="w-10 h-10 rounded-xl bg-brand-slate text-white flex items-center justify-center shrink-0 text-sm mt-0.5"><i class="fa-solid fa-code"></i></div>
                                     <div class="flex-1">
                                         <span class="text-[10px] font-bold uppercase tracking-wider text-brand-slate px-2 py-0.5 bg-brand-sage/50 rounded">MySkill</span>
-                                        <h4 class="font-bold text-brand-dark text-sm mt-1 group-hover:text-brand-slate transition-colors">Website Development Fundamental</h4>
-                                        <p class="text-xs text-brand-slate mt-0.5">Pemahaman struktur web, markup HTML, styling CSS, dan alur pembuatan website modern.</p>
+                                        <h4 class="font-bold text-brand-dark text-sm mt-1">Website Development Fundamental</h4>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Cert 2 -->
                             <div class="group p-4 rounded-2xl bg-brand-light border border-gray-200 hover:border-brand-accent hover:bg-white transition-all">
                                 <div class="flex items-start gap-3">
-                                    <div class="w-10 h-10 rounded-xl bg-brand-slate text-white flex items-center justify-center shrink-0 text-sm mt-0.5">
-                                        <i class="fa-solid fa-network-wired"></i>
-                                    </div>
+                                    <div class="w-10 h-10 rounded-xl bg-brand-slate text-white flex items-center justify-center shrink-0 text-sm mt-0.5"><i class="fa-solid fa-network-wired"></i></div>
                                     <div class="flex-1">
                                         <span class="text-[10px] font-bold uppercase tracking-wider text-brand-slate px-2 py-0.5 bg-brand-sage/50 rounded">MySkill</span>
-                                        <h4 class="font-bold text-brand-dark text-sm mt-1 group-hover:text-brand-slate transition-colors">Internet Introduction</h4>
-                                        <p class="text-xs text-brand-slate mt-0.5">Fondasi arsitektur jaringan internet, protokol web, keamanan dasar, dan ekosistem digital.</p>
+                                        <h4 class="font-bold text-brand-dark text-sm mt-1">Internet Introduction</h4>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Verification Note Box -->
-                            <div class="p-3.5 rounded-2xl bg-brand-sage/30 border border-brand-sage/60 text-xs text-brand-slate flex items-center gap-2.5">
-                                <i class="fa-solid fa-shield-check text-brand-dark text-base"></i>
-                                <span class="">Kredensial resmi terverifikasi dan dapat ditunjukkan sesuai permintaan.</span>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
         <!-- ========================================================================= -->
-        <!-- 5. EXPERIENCE & LEADERSHIP SECTION (Vertical Timeline Layout)              -->
+        <!-- 5. EXPERIENCE & LEADERSHIP SECTION                                        -->
         <!-- ========================================================================= -->
         <section id="experience" class="py-20 bg-white border-y border-gray-200/70 relative">
             <div class="max-w-7xl mx-auto px-6 sm:px-8">
@@ -598,7 +507,7 @@
         </section>
 
         <!-- ========================================================================= -->
-        <!-- 6. CONTACT & FOOTER SECTION                                               -->
+        <!-- 6. CONTACT SECTION                                                        -->
         <!-- ========================================================================= -->
         <section id="contact" class="py-20 relative">
             <div class="max-w-7xl mx-auto px-6 sm:px-8">
@@ -695,22 +604,23 @@
     </footer>
 
     <!-- ========================================================================= -->
-    <!-- JAVASCRIPT: STICKY NAVBAR & INTERACTIONS                                  -->
+    <!-- SCRIPTS                                                                   -->
     <!-- ========================================================================= -->
     <script>
-        // 1. Sticky Navbar Dynamic Color Change on Scroll
-        const navbar = document.getElementById('navbar');
+        /* 1. STICKY NAVBAR LOGIC (Menyembunyikan navbar di atas Hero) */
+        const oldNavbar = document.getElementById('navbar');
+        const heroSection = document.getElementById('hero-editorial');
+
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 30) {
-                navbar.classList.remove('bg-transparent', 'py-4');
-                navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-2.5', 'border-b', 'border-gray-200/60');
+            // Jika sudah melewati 80% dari tinggi hero, tampilkan navbar putih standar
+            if (window.scrollY > heroSection.offsetHeight * 0.8) {
+                oldNavbar.classList.remove('-translate-y-full');
             } else {
-                navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-2.5', 'border-b', 'border-gray-200/60');
-                navbar.classList.add('bg-transparent', 'py-4');
+                oldNavbar.classList.add('-translate-y-full');
             }
         });
 
-        // 2. Mobile Menu Toggle
+        /* 2. OLD MOBILE MENU TOGGLE (Navbar Putih) */
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         const menuIcon = document.getElementById('menuIcon');
@@ -718,26 +628,78 @@
 
         mobileMenuBtn.addEventListener('click', () => {
             const isHidden = mobileMenu.classList.toggle('hidden');
-            if (isHidden) {
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
-            } else {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-xmark');
-            }
+            menuIcon.classList.toggle('fa-bars', isHidden);
+            menuIcon.classList.toggle('fa-xmark', !isHidden);
         });
 
-        // Close mobile menu when link is clicked
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.replace('fa-xmark', 'fa-bars');
             });
         });
+
+        /* 3. NEW EDITORIAL HERO MOBILE DRAWER LOGIC */
+        const edMenuBtn = document.getElementById('ed-hamburger-btn');
+        const edDrawerBackdrop = document.getElementById('ed-drawer-backdrop');
+        const edDrawerPanel = document.getElementById('ed-drawer-panel');
+        const edDrawerClose = document.getElementById('ed-drawer-close');
+        const edDrawerItems = document.querySelectorAll('.drawer-item');
+        const edBars = edMenuBtn.querySelectorAll('div');
+
+        function openEdMenu() {
+            document.body.style.overflow = 'hidden';
+            edDrawerBackdrop.classList.remove('opacity-0', 'pointer-events-none');
+            edDrawerBackdrop.classList.add('opacity-100');
+            edDrawerPanel.classList.remove('translate-x-full');
+            edDrawerPanel.classList.add('translate-x-0');
+            edDrawerClose.classList.remove('opacity-0', 'rotate-90');
+            
+            // Hamburger to X animation
+            edBars[0].style.transform = 'translateY(8px) rotate(45deg)';
+            edBars[1].style.opacity = '0';
+            edBars[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+
+            // Staggered items reveal
+            edDrawerItems.forEach((item, i) => {
+                setTimeout(() => {
+                    item.classList.remove('opacity-0', 'translate-y-6', 'translate-y-4');
+                    item.classList.add('opacity-100', 'translate-y-0', 'transition-all', 'duration-500');
+                }, 250 + (i * 80));
+            });
+        }
+
+        function closeEdMenu() {
+            document.body.style.overflow = '';
+            edDrawerBackdrop.classList.remove('opacity-100');
+            edDrawerBackdrop.classList.add('opacity-0', 'pointer-events-none');
+            edDrawerPanel.classList.remove('translate-x-0');
+            edDrawerPanel.classList.add('translate-x-full');
+            edDrawerClose.classList.add('opacity-0', 'rotate-90');
+            
+            // X to Hamburger animation
+            edBars[0].style.transform = 'none';
+            edBars[1].style.opacity = '1';
+            edBars[2].style.transform = 'none';
+
+            // Reset items
+            edDrawerItems.forEach(item => {
+                item.classList.remove('opacity-100', 'translate-y-0', 'transition-all', 'duration-500');
+                if (item.tagName === 'SPAN') item.classList.add('opacity-0', 'translate-y-4');
+                else item.classList.add('opacity-0', 'translate-y-6');
+            });
+        }
+
+        edMenuBtn.addEventListener('click', openEdMenu);
+        edDrawerClose.addEventListener('click', closeEdMenu);
+        edDrawerBackdrop.addEventListener('click', closeEdMenu);
+        
+        // Tutup menu drawer saat tautan navigasi di dalamnya di klik
+        edDrawerItems.forEach(item => {
+            if(item.tagName === 'A') {
+                item.addEventListener('click', closeEdMenu);
+            }
+        });
     </script>
-
-
-
-
-</body></html>
+</body>
+</html>
